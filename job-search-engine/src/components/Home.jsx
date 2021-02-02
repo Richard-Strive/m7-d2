@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import {
   Button,
   Navbar,
@@ -14,36 +15,52 @@ import "./Home.css";
 //cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=frontend&location=berlin
 //https://jobs.github.com/positions.json?description={POSITION}&location={LOCATION}
 
-// const getResults = async () => {
-//   try {
-//     const response = await fetch(
-//       " https://cors--anywhere.herokuapp.com//https://jobs.github.com/positions.json?description=frontend&location=berlin",
-//       {
-//         method: "GET",
-//         mode: "no-cors",
-//       }
-//     );
-//     console.log(await response.json());
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-const getResults = async () => {
-  try {
-    const response = await fetch(
-      " https://cors--anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=frontend&location=berlin"
-    );
-    console.log(await response.json());
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export default class Home extends Component {
-  componentDidMount() {
-    getResults();
-  }
+  state = {
+    title: "",
+    location: "",
+    jobList: [],
+  };
+
+  getResults = async (location, title) => {
+    try {
+      const response = await fetch(
+        `https://cors--anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${title}&location=${location}`
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        this.setState({
+          ...this.state,
+          jobList: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  handleTitle = (e) => {
+    this.setState({
+      ...this.state,
+      title: e.target.value,
+    });
+  };
+
+  handleLocation = (e) => {
+    this.setState({
+      ...this.state,
+      location: e.target.value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.getResults(this.state.title, this.state.location);
+  };
+  // getResults(this.state.location, this.state.position);
+
   render() {
     return (
       <Navbar bg="dark" expand="lg" className="home_nav_items">
@@ -55,18 +72,24 @@ export default class Home extends Component {
         </div>
         <div>
           <Navbar.Collapse id="basic-navbar-nav">
-            <Form inline>
+            <Form inline onSubmit={this.handleSubmit}>
               <FormControl
                 type="text"
-                placeholder="Choose the position"
+                placeholder="Choose the title"
+                value={this.state.title}
                 className="mr-sm-2"
+                onChange={this.handleTitle}
               />
               <FormControl
                 type="text"
                 placeholder="Choose the location"
+                value={this.state.location}
                 className="mr-sm-2"
+                onChange={this.handleLocation}
               />
-              <Button variant="outline-success">Search</Button>
+              <Button type="Submit" variant="outline-success">
+                Search
+              </Button>
             </Form>
           </Navbar.Collapse>
         </div>
