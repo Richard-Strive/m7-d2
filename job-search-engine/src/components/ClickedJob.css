@@ -1,0 +1,11 @@
+.card_container {
+  background-color: grey !important;
+  height: fit-content;
+  width: 30vw;
+  padding-right: 0;
+}
+
+.card_img {
+  height: auto;
+  width: 50px;
+}

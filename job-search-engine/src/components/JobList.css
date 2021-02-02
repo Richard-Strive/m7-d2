@@ -1,0 +1,28 @@
+.job_info_container {
+  margin-top: 10px;
+  height: 190px;
+  width: 60%;
+
+  color: white;
+  border-bottom: 0.5px solid grey;
+}
+
+.job_header {
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.company_logo {
+  border-radius: 50px;
+  height: 30px;
+  width: 30px;
+}
+
+.job_infos {
+  height: 60%;
+  width: 80%;
+  margin-left: 11%;
+  border: 1px solid grey;
+  border-radius: 8px;
+  overflow: scroll;
+}

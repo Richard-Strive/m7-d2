@@ -2,3 +2,11 @@
   display: flex !important;
   justify-content: center;
 }
+.the_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fake-loader {
+  margin-left: 350px;
+}
