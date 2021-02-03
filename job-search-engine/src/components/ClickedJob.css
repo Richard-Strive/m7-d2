@@ -1,6 +1,7 @@
 .card_container {
   background-color: grey !important;
-  height: fit-content;
+  height: 80vh;
+  overflow: scroll;
   width: 30vw;
   padding-right: 0;
 }

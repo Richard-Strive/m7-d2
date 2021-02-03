@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Row, Card, Container, Spinner } from "react-bootstrap";
 import "./JobList.css";
 

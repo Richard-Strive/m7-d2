@@ -1,6 +1,6 @@
 import React from "react";
 import "./ClickedJob.css";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 function ClickedJob(props) {
   console.log(props);
   return (
@@ -20,6 +20,7 @@ function ClickedJob(props) {
           </Card.Text>
         </Card.Body>
       </Card>
+      <Button variant="success" />
     </div>
   );
 }
