@@ -20,7 +20,9 @@ function ClickedJob(props) {
           </Card.Text>
         </Card.Body>
       </Card>
-      <Button variant="success" />
+      <Button variant="success" className="fav_button">
+        See more
+      </Button>
     </div>
   );
 }

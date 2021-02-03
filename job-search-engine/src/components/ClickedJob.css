@@ -10,3 +10,10 @@
   height: auto;
   width: 50px;
 }
+
+.fav_button {
+  margin-left: 35%;
+  margin-top: 2%;
+  width: 30%;
+  height: 40px;
+}
