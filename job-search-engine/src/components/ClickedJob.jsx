@@ -1,6 +1,7 @@
 import React from "react";
 import "./ClickedJob.css";
 import { Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 function ClickedJob(props) {
   console.log(props);
   return (
@@ -21,7 +22,9 @@ function ClickedJob(props) {
         </Card.Body>
       </Card>
       <Button variant="success" className="fav_button">
-        See more
+        <Link className="link_style" to="/favourites">
+          See more
+        </Link>
       </Button>
     </div>
   );

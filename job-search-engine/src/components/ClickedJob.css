@@ -17,3 +17,13 @@
   width: 30%;
   height: 40px;
 }
+
+.link_style {
+  color: white;
+  /* cursor: pointer; */
+}
+.link_style:hover {
+  text-decoration: none;
+  color: white;
+  /* cursor: pointer; */
+}

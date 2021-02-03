@@ -25,3 +25,8 @@
   border-radius: 8px;
   overflow: scroll;
 }
+
+.link_style:hover {
+  text-decoration: none;
+  color: white;
+}

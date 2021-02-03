@@ -23,7 +23,7 @@ function FavoriteJobs() {
       <Navbar bg="dark" expand="lg" className="home_nav_items">
         <div>
           <Navbar.Brand href="#home">
-            <Link to="/">
+            <Link to="/" className="link_style">
               <GitHubIcon className="text-white mb-1" />{" "}
               <span className="text-white">Home</span>
             </Link>
