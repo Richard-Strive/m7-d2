@@ -4,6 +4,14 @@
   overflow: scroll;
   width: 30vw;
   padding-right: 0;
+  position: relative;
+}
+
+.the_like_heart {
+  position: absolute;
+  color: white;
+  height: 20px;
+  right: 0;
 }
 
 .card_img {
