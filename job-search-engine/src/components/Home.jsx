@@ -40,6 +40,27 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({
       type: "TOGGLE_SHOW",
     }),
+
+  firstAsyncFetch: (location, title) => {
+    dispatch(async (dispatch, getState) => {
+      const response = await fetch(
+        `https://cors--anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${title}&location=${location}`
+      );
+      const data = await response.json();
+
+      console.log("I'M THE REDUX FETCH DATA--->", data);
+      console.log("THIS IS MY STATE", getState());
+
+      if (response.ok) {
+        dispatch({
+          type: "GET_DATA",
+          payload: data,
+        });
+      } else {
+        console.log("SOMETHING WHEN WRONG ON YOUR REDUX ASYNC FETCH");
+      }
+    });
+  },
 });
 
 //cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=frontend&location=berlin
@@ -54,24 +75,26 @@ class Home extends Component {
     selectedJob: null,
   };
 
-  getResults = async (location, title) => {
-    try {
-      const response = await fetch(
-        `https://cors--anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${title}&location=${location}`
-      );
-      const data = await response.json();
-      if (response.ok) {
-        this.setState({
-          ...this.state,
-          jobList: data,
-          loader: false,
-        });
-        this.props.handleData(this.state.jobList);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // getResults = async (location, title) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://cors--anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${title}&location=${location}`
+  //     );
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       this.setState({
+  //         ...this.state,
+  //         jobList: data,
+  //         loader: false,
+  //       });
+  //       this.props.handleData(this.state.jobList);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  //PREV FETCH METHOD REPLACED BY REDUX ONE!!!
 
   handleSelectedJob = (id) => {
     this.setState({
@@ -96,7 +119,8 @@ class Home extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.getResults(this.state.title, this.state.location);
+    this.props.firstAsyncFetch(this.state.title, this.state.location);
+    console.log(this.props.jobData);
   };
   // getResults(this.state.location, this.state.position);
 
@@ -143,7 +167,7 @@ class Home extends Component {
         <Col xs={6}>
           <Toast
             className="my_toast"
-            show={this.props.showA}
+            show={this.props.fav.showA}
             onClose={() => this.props.handleToggleShow()}
           >
             <Toast.Header>
@@ -168,12 +192,12 @@ class Home extends Component {
 
         <Container className="the_container">
           <div className="listed_jobs">
-            {this.state.jobList.length < 1 ? (
+            {this.props.jobData.length < 1 ? (
               <h1 className="text-center mt-5 text-white fake-loader">
                 Select a title or a location{" "}
               </h1>
             ) : (
-              this.state.jobList.map((job, index) => (
+              this.props.jobData.jobs.map((job, index) => (
                 <JobList
                   {...job}
                   key={index}

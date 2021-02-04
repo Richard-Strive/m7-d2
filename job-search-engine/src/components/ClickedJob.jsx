@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
 function ClickedJob(props) {
   console.log(props);
 
-  const likedJobId = props.liked.find((id) => id === props.singleJob.id);
+  const likedJobId = props.fav.liked.find((id) => id === props.singleJob.id);
   console.log(likedJobId);
   return (
     <div>

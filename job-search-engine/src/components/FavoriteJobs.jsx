@@ -21,7 +21,7 @@ import "./FavoriteJobs.css";
 const mapStateToProps = (state) => state;
 
 function FavoriteJobs(props) {
-  const likedArray = props.liked;
+  const likedArray = props.fav.liked;
   const jobListArray = props.jobList;
 
   let favObjArray = [];
