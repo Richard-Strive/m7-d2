@@ -14,14 +14,40 @@ const mapDispatchToProps = (dispatch) => ({
       type: "ADD_FAVORITE",
       payload: id,
     }),
+
+  handleDeleteLovedJob: (id) =>
+    dispatch({
+      type: "REMOVE_FAVORITE",
+      payload: id,
+    }),
+
+  handleToggleShow: () =>
+    dispatch({
+      type: "TOGGLE_SHOW",
+    }),
 });
+
+//
 
 function ClickedJob(props) {
   console.log(props);
+
+  const likedJobId = props.liked.find((id) => id === props.singleJob.id);
+  console.log(likedJobId);
   return (
     <div>
       <Card className="card_container">
-        <FavoriteBorderIcon className="the_like_heart" />
+        {props.singleJob.id === likedJobId ? (
+          <FavoriteIcon
+            className="the_like_heart"
+            onClick={() => props.handleDeleteLovedJob(props.singleJob.id)}
+          />
+        ) : (
+          <FavoriteBorderIcon
+            className="the_like_heart"
+            onClick={() => props.handleLovedJob(props.singleJob.id)}
+          />
+        )}
         <Card.Img
           className="card_img"
           variant="top"
@@ -41,11 +67,6 @@ function ClickedJob(props) {
           See more
         </Link>
       </Button>
-      <Button
-        variant="danger"
-        className="fav_button"
-        onClick={() => props.handleLovedJob(props.singleJob.id)}
-      />
     </div>
   );
 }

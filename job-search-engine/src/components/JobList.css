@@ -3,6 +3,8 @@
   height: 190px;
   width: 60%;
 
+  overflow: scroll;
+
   color: white;
   border-bottom: 0.5px solid grey;
 }

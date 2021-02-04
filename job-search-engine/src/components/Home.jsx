@@ -11,17 +11,41 @@ import {
   Form,
   FormControl,
   Container,
-  Col,
   Spinner,
+  Col,
+  Toast,
 } from "react-bootstrap";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.css";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = (dispatch) => ({
+  handleLovedJob: (id) =>
+    dispatch({
+      type: "ADD_FAVORITE",
+      payload: id,
+    }),
+
+  handleDeleteLovedJob: (id) =>
+    dispatch({
+      type: "REMOVE_FAVORITE",
+      payload: id,
+    }),
+
+  handleToggleShow: () =>
+    dispatch({
+      type: "TOGGLE_SHOW",
+    }),
+});
 
 //cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=frontend&location=berlin
 //https://jobs.github.com/positions.json?description={POSITION}&location={LOCATION}
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     title: "",
     location: "",
@@ -42,6 +66,7 @@ export default class Home extends Component {
           jobList: data,
           loader: false,
         });
+        this.props.handleData(this.state.jobList);
       }
     } catch (error) {
       console.log(error);
@@ -74,6 +99,11 @@ export default class Home extends Component {
     this.getResults(this.state.title, this.state.location);
   };
   // getResults(this.state.location, this.state.position);
+
+  // componentDidMount() {
+  //   console.log(this.props);
+  //   console.log(this.state.jobList);
+  // }
 
   render() {
     return (
@@ -110,9 +140,34 @@ export default class Home extends Component {
             </Navbar.Collapse>
           </div>
         </Navbar>
+        <Col xs={6}>
+          <Toast
+            className="my_toast"
+            show={this.props.showA}
+            onClose={() => this.props.handleToggleShow()}
+          >
+            <Toast.Header>
+              <img
+                src="holder.js/20x20?text=%20"
+                className="rounded mr-2"
+                alt=""
+              />
+              <strong className="mr-auto">New item liked</strong>
+            </Toast.Header>
+            <Toast.Body>
+              <Link
+                className="link_style_toast"
+                to="/favourites"
+                onClose={() => this.props.handleToggleShow()}
+              >
+                Checkout your liked jobs here
+              </Link>
+            </Toast.Body>
+          </Toast>
+        </Col>
 
         <Container className="the_container">
-          <div>
+          <div className="listed_jobs">
             {this.state.jobList.length < 1 ? (
               <h1 className="text-center mt-5 text-white fake-loader">
                 Select a title or a location{" "}
@@ -129,7 +184,10 @@ export default class Home extends Component {
           </div>
           <div className="mt-3 ">
             {this.state.selectedJob && (
-              <ClickedJob singleJob={this.state.selectedJob} />
+              <ClickedJob
+                singleJob={this.state.selectedJob}
+                jobList={this.state.jobList}
+              />
             )}
           </div>
         </Container>
@@ -137,3 +195,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

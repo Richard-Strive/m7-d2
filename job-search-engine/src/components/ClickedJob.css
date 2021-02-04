@@ -12,6 +12,7 @@
   color: white;
   height: 20px;
   right: 0;
+  cursor: pointer;
 }
 
 .card_img {

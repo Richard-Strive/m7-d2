@@ -4,7 +4,12 @@ export default function (state = {}, action) {
       return {
         ...state,
         liked: [...state.liked, action.payload],
-        like: true,
+        showA: true,
+      };
+    case "TOGGLE_SHOW":
+      return {
+        ...state,
+        showA: false,
       };
     case "REMOVE_FAVORITE":
       return {

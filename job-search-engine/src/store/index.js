@@ -3,7 +3,7 @@ import myReducer from "../myReducers";
 
 const initialState = {
   liked: [],
-  heartLike: false,
+  showA: false,
 };
 
 export default function configureStore() {

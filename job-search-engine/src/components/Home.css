@@ -1,6 +1,7 @@
 .home_nav_items {
   display: flex !important;
   justify-content: center;
+  position: relative;
 }
 .the_container {
   display: flex;
@@ -9,4 +10,25 @@
 
 .fake-loader {
   margin-left: 350px;
+}
+
+.listed_jobs {
+  margin-top: 20px;
+  /* background-color: white; */
+  width: fit-content;
+  height: 80vh;
+  overflow: scroll;
+}
+
+.my_toast {
+  position: absolute;
+  top: -50px;
+  right: -650px;
+  z-index: 1;
+}
+
+.link_style_toast {
+  color: green !important;
+  text-decoration: underline !important;
+  /* cursor: pointer; */
 }
