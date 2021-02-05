@@ -1,30 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import Home from "./components/Home";
 import FavoriteJobs from "./components/FavoriteJobs";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 function App() {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-  const handleData = (data) => {
-    setData(data);
-  };
+  // const handleData = (data) => {
+  //   setData(data);
+  // };
 
-  console.log(data);
+  // console.log(data);
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => <Home handleData={handleData} />}
-          />
+          <Route exact path="/" render={() => <Home />} />
           <Route
             exact
             path="/favourites"
-            render={() => <FavoriteJobs jobList={data} />}
+            render={(props) => <FavoriteJobs {...props} />}
           />
         </Switch>
       </Router>

@@ -3,7 +3,17 @@ export default function (state = {}, action) {
     case "GET_DATA":
       return {
         ...state,
-        jobs: [action.payload],
+        jobs: action.payload,
+      };
+    case "GET_DATA":
+      return {
+        ...state,
+        jobs: action.payload,
+      };
+    case "SELECTED_JOB":
+      return {
+        ...state,
+        selectedJob: action.payload,
       };
     default:
       return state;

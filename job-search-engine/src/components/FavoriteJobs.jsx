@@ -1,18 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import {
-  Button,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Col,
-  Spinner,
-  Row,
-  Card,
-  Container,
-} from "react-bootstrap";
+import { Navbar, Row } from "react-bootstrap";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -22,20 +10,20 @@ const mapStateToProps = (state) => state;
 
 function FavoriteJobs(props) {
   const likedArray = props.fav.liked;
-  const jobListArray = props.jobList;
+  const jobArray = props.jobData.jobs;
 
   let favObjArray = [];
 
   const populatefavObjArray = () => {
     for (let i = 0; i < likedArray.length; i++) {
-      favObjArray.push(jobListArray.find((job) => job.id === likedArray[i]));
+      favObjArray.push(jobArray.find((job) => job.id === likedArray[i]));
     }
   };
   //MY POPULATE FN LOL
 
   populatefavObjArray();
 
-  console.log(favObjArray);
+  console.log(props);
 
   return (
     <>

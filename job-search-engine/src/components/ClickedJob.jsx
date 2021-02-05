@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ClickedJob.css";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -34,6 +34,7 @@ function ClickedJob(props) {
 
   const likedJobId = props.fav.liked.find((id) => id === props.singleJob.id);
   console.log(likedJobId);
+  // console.log(props.singleJob);
   return (
     <div>
       <Card className="card_container">
@@ -51,13 +52,15 @@ function ClickedJob(props) {
         <Card.Img
           className="card_img"
           variant="top"
-          src={props.singleJob.company_logo}
+          src={props.jobData.selectedJob.company_logo}
         />
         <Card.Body className="the_card_body">
-          <Card.Title>{props.singleJob.title}</Card.Title>
+          <Card.Title>{props.jobData.selectedJob.title}</Card.Title>
           <Card.Text>
             <div
-              dangerouslySetInnerHTML={{ __html: props.singleJob.description }}
+              dangerouslySetInnerHTML={{
+                __html: props.jobData.selectedJob.description,
+              }}
             ></div>
           </Card.Text>
         </Card.Body>

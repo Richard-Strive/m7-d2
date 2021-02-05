@@ -10,7 +10,7 @@ const initialState = {
     liked: [],
     showA: false,
   },
-  jobData: { jobs: [] },
+  jobData: { jobs: [], selectedJob: null },
 };
 
 const hugeReducer = combineReducers({ fav: Fav, jobData: ReducerList });

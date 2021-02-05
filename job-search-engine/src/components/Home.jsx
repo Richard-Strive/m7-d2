@@ -6,12 +6,9 @@ import JobList from "./JobList";
 import {
   Button,
   Navbar,
-  Nav,
-  NavDropdown,
   Form,
   FormControl,
   Container,
-  Spinner,
   Col,
   Toast,
 } from "react-bootstrap";
@@ -49,18 +46,24 @@ const mapDispatchToProps = (dispatch) => ({
       const data = await response.json();
 
       console.log("I'M THE REDUX FETCH DATA--->", data);
-      console.log("THIS IS MY STATE", getState());
 
       if (response.ok) {
         dispatch({
           type: "GET_DATA",
           payload: data,
         });
+        console.log("THIS IS MY STATE", getState());
       } else {
         console.log("SOMETHING WHEN WRONG ON YOUR REDUX ASYNC FETCH");
       }
     });
   },
+
+  handleSelectedJob: (id) =>
+    dispatch({
+      type: "SELECTED_JOB",
+      payload: id,
+    }),
 });
 
 //cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=frontend&location=berlin
@@ -96,12 +99,12 @@ class Home extends Component {
 
   //PREV FETCH METHOD REPLACED BY REDUX ONE!!!
 
-  handleSelectedJob = (id) => {
-    this.setState({
-      ...this.state,
-      selectedJob: this.state.jobList.find((job) => job.id === id),
-    });
-  };
+  // handleSelectedJob = (id) => {
+  //   // this.setState({
+  //   //   ...this.state,
+  //   //   selectedJob: this.state.jobList.find((job) => job.id === id),
+  //   // });
+  // };
 
   handleTitle = (e) => {
     this.setState({
@@ -192,7 +195,7 @@ class Home extends Component {
 
         <Container className="the_container">
           <div className="listed_jobs">
-            {this.props.jobData.length < 1 ? (
+            {this.props.jobData.jobs.length < 1 ? (
               <h1 className="text-center mt-5 text-white fake-loader">
                 Select a title or a location{" "}
               </h1>
@@ -201,16 +204,16 @@ class Home extends Component {
                 <JobList
                   {...job}
                   key={index}
-                  selectedJob={this.handleSelectedJob}
+                  selectedJob={this.props.handleSelectedJob}
                 />
               ))
             )}
           </div>
           <div className="mt-3 ">
-            {this.state.selectedJob && (
+            {this.props.jobData.selectedJob && (
               <ClickedJob
-                singleJob={this.state.selectedJob}
-                jobList={this.state.jobList}
+                singleJob={this.props.jobData.selectedJob}
+                jobList={this.props.jobList}
               />
             )}
           </div>

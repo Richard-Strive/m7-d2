@@ -1,35 +1,33 @@
-import { Row, Card, Container, Spinner } from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import { connect } from "react-redux";
 import "./JobList.css";
 
-function JobList({
-  company,
-  company_logo,
-  description,
-  title,
-  location,
-  id,
-  selectedJob,
-}) {
-  console.log(id);
+const mapStateToProps = (state) => state;
+
+function JobList(props) {
+  console.log(props);
   return (
-    <div className="job_info_container" onClick={() => selectedJob(id)}>
-      <div className="text-center">RESULTS FOR {location}</div>
+    <div
+      className="job_info_container"
+      onClick={() => props.selectedJob(props)}
+    >
+      <div className="text-center">RESULTS FOR {props.location}</div>
       <Row>
         <div className="job_header">
-          <img className="company_logo" src={company_logo} alt=" " />
+          <img className="company_logo" src={props.company_logo} alt=" " />
           <span className="ml-2">
-            <b>{company}</b>
+            <b>{props.company}</b>
           </span>
         </div>
       </Row>
       <div className="job_infos">
-        <b className="ml-3">{title}</b>
+        <b className="ml-3">{props.title}</b>
         <p className="ml-3">
-          <div dangerouslySetInnerHTML={{ __html: description }}></div>
+          <div dangerouslySetInnerHTML={{ __html: props.description }}></div>
         </p>
       </div>
     </div>
   );
 }
 
-export default JobList;
+export default connect(mapStateToProps)(JobList);
